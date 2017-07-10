@@ -11,7 +11,7 @@ module.exports = db.define('campus', {
     imageUrl: {
         type: Sequelize.VIRTUAL,
         get: function () {
-            return `/api/albums/${this.id}/image`;
+            return `/api/campus/${this.id}/image`;
     }
   }
 });
