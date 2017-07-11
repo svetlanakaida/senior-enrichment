@@ -5,7 +5,7 @@ import Campuses from './Campuses';
 import Students from './Students';
 import OneCampus from './OneCampus';
 import OneStudent from './OneStudent';
-
+import NavBar from './NavBar';
 
 export default class Main extends Component {
 
@@ -16,10 +16,7 @@ export default class Main extends Component {
       <Router>
         <div >
           <div className="col-xs-10">
-           <ul className="nav nav-tabs">
-              <li><Link to={'/campuses'}>HOME</Link></li>
-              <li><Link to={'/students'}>STUDENTS</Link></li>
-            </ul>
+              <NavBar />
               <hr/>
             <Switch>
              <Route exact path="/" component={Campuses} />

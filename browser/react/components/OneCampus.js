@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Students from '../components/Students';
 
 
 export default class OneCampus extends Component {
@@ -26,8 +27,9 @@ export default class OneCampus extends Component {
     return (
       <div className="campus">
         <div>
-          <h3>{ campus.name }</h3>
           <img src={ campus.imageUrl } className="img-thumbnail" />
+           <h3>{ campus.name }</h3>
+           <Students students ={campus.students} />
         </div>
       </div>
     );

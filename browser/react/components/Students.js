@@ -27,17 +27,26 @@ export default class Students extends Component {
     return (
       <div>
         <h3>STUDENTS</h3>
+        <button type="button" className="btn btn-default" aria-label="Left Align">
+              <a href ="mailto:youraddr@domain.tld">
+                  <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </a>
+          </button>
+
         <div className="list-group">
           {
             students.map(student => {
               return (
                 <div className="list-group-item" key={student.id}>
                   <Link to={`/students/${student.id}`}>{ student.name }</Link>
+
                 </div>
               );
             })
           }
+
         </div>
+
       </div>
     );
   }
