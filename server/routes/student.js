@@ -7,13 +7,19 @@ const Student = models.Student;
 module.exports = router;
 
 router.get('/', function (req, res, next) {
-
+if(req.query.campusId){
+    Student.findAll({where: {campusId: req.query.campusId}})
+        .then(function(students){
+            res.send(students);
+        })
+    }
+    else {
     Student.findAll()
         .then(function (students) {
             res.send(students);
         })
         .catch(next);
-
+    }
 });
 
 router.get('/:id', function (req, res, next) {

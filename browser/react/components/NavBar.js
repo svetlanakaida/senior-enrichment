@@ -6,7 +6,7 @@ const NavBar = (props) => {
   return (
       <navbar>
      <ul className="nav nav-tabs">
-              <button>
+              <button >
               <Link to={'/campuses'}>HOME</Link>
               </button>
                <button>

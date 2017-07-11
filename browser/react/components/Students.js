@@ -28,10 +28,8 @@ export default class Students extends Component {
       <div>
         <h3>STUDENTS</h3>
         <button type="button" className="btn btn-default" aria-label="Left Align">
-              <a href ="mailto:youraddr@domain.tld">
-                  <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
-              </a>
-          </button>
+           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
 
         <div className="list-group">
           {
@@ -39,7 +37,9 @@ export default class Students extends Component {
               return (
                 <div className="list-group-item" key={student.id}>
                   <Link to={`/students/${student.id}`}>{ student.name }</Link>
-
+                    <button type="button" className="btn btn-default btn-xs">
+                      Delete
+                    </button>
                 </div>
               );
             })

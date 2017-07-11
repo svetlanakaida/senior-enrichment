@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('../../db/models');
 const Campus = models.Campus;
+const Student = models.Student;
 module.exports = router;
 
 router.get('/', function (req, res, next) {
