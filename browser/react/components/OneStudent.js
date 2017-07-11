@@ -27,8 +27,6 @@ export default class OneStudent extends Component {
       <div className="student">
         <div>
           <h3>{student.name}</h3>
-         <h3>{student.email}</h3>
-         <h3> students campus</h3>
         </div>
       </div>
     );

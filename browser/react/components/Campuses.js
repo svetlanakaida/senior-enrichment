@@ -12,10 +12,10 @@ export default class Campuses extends Component {
   }
 
   componentDidMount () {
-    axios.get('/api/campuses/')
+    axios.get('/api/campus/')
       .then(res => res.data)
       .then(campus => {
-          this.setState({ campus })
+          this.setState({ campuses: campus })
       });
   }
 
@@ -31,7 +31,9 @@ export default class Campuses extends Component {
             campuses.map(campus => {
               return (
                 <div className="list-group-item" key={campus.id}>
+                <img src={ campus.imageUrl } />
                   <Link to={`/campuses/${campus.id}`}>{ campus.name }</Link>
+
                 </div>
               );
             })

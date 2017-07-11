@@ -12,10 +12,11 @@ export default class Students extends Component {
   }
 
   componentDidMount () {
-    axios.get('/api/students/')
+    axios.get('/api/student/')
       .then(res => res.data)
       .then(student => {
-          this.setState({ student })
+        console.log("student", student);
+          this.setState({ students: student })
       });
   }
 

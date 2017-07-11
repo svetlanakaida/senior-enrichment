@@ -20,6 +20,7 @@ export default class Main extends Component {
               <li><Link to={'/campuses'}>HOME</Link></li>
               <li><Link to={'/students'}>STUDENTS</Link></li>
             </ul>
+              <hr/>
             <Switch>
              <Route exact path="/" component={Campuses} />
               <Route exact path="/campuses" component={Campuses} />

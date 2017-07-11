@@ -61,3 +61,22 @@ router.put('/:id', function (req, res, next) {
     })
     .catch(next)
 });
+
+router.delete('/:id', function (req, res, next) {
+    if (!req.params.id) {
+        res.sendStatus(500);
+    }
+   Student.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(function (student) {
+            if (!student) { res.sendStatus(404) };
+            return student.destroy({})
+        })
+        .then(function (student) {
+            res.sendStatus(204);
+        })
+        .catch(next)
+});
