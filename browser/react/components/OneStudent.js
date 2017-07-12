@@ -13,6 +13,8 @@ export default class OneStudent extends Component {
 
   componentDidMount () {
     const studentId = this.props.match.params.studentId;
+
+  console.log("PRINT",studentId)
     axios.get(`/api/student/${studentId}`)
       .then(res => res.data)
       .then(student => this.setState({

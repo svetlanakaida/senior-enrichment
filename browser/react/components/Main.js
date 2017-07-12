@@ -17,7 +17,6 @@ export default class Main extends Component {
         <div >
           <div className="col-xs-10">
               <NavBar />
-              <hr/>
             <Switch>
              <Route exact path="/" component={Campuses} />
               <Route exact path="/campuses" component={Campuses} />

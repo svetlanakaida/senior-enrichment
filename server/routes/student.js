@@ -24,7 +24,9 @@ if(req.query.campusId){
 
 router.get('/:id', function (req, res, next) {
     Student.findOne({
+        where:{
         id: req.params.id
+        }
     })
         .then(function (student) {
 

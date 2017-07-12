@@ -36,7 +36,9 @@ export default class Students extends Component {
             students.map(student => {
               return (
                 <div className="list-group-item" key={student.id}>
-                  <Link to={`/students/${student.id}`}>{ student.name }</Link>
+                  <Link to={`/students/${student.id}`}>{ student.name}</Link>
+                  <p>{student.email }</p>
+
                     <button type="button" className="btn btn-default btn-xs">
                       Delete
                     </button>
