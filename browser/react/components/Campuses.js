@@ -30,10 +30,15 @@ export default class Campuses extends Component {
           {
             campuses.map(campus => {
               return (
-                <div className="list-group-item" key={campus.id}>
-                <img src={ campus.imageUrl } />
-                  <Link to={`/campuses/${campus.id}`}>{ campus.name }</Link>
-
+                <div className="col-lg-6" key={campus.id}>
+                  <Link to={`/campuses/${campus.id}`}>
+                    <img src={ campus.imageUrl } />
+                    <div className="caption">
+                      <h5>
+                        <span>{ campus.name }</span>
+                      </h5>
+                    </div>
+                  </Link>
                 </div>
               );
             })

@@ -21,11 +21,11 @@ export default class OneCampus extends Component {
       .then(campus => this.setState({
         selectedCampus: campus
       }))
-      .then( res =>{
+        .then( res =>{
         axios.get(`/api/student/?campusId=${campusId}`)
-      .then(res => res.data)
-      .then(students => this.setState({
-        selectedStudents: students
+        .then(res => res.data)
+        .then(students => this.setState({
+          selectedStudents: students
       }));
       });
   }
@@ -39,21 +39,36 @@ export default class OneCampus extends Component {
         <div>
           <img src={ campus.imageUrl } className="img-thumbnail" />
            <h3>{ campus.name }</h3>
-           <h3>Students</h3>
-           {
-            this.state.selectedStudents.map(student => {
-              return (
-                <div className="list-group-item" key={student.id}>
-                  <Link to={`/students/${student.id}`}>{ student.name }</Link>
-                    <button type="button" className="btn btn-default btn-xs">
-                      Delete
-                    </button>
-                </div>
-              );
-            })
-           }
+           <h5>Students</h5>
+           <table className='table'>
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>CAMPUS</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>{
+            this.state.selectedStudents.map(student => (
+              <tr  key={student.id}>
+              <td>{ student.name}</td>
+              <td>{student.email }</td>
+              <td>{campus.name}</td>
+              <td>
+              <Link to={`/students/${student.id}`}>
+                <button type="button" className="btn btn-default" aria-label="Left Align">View profile
+                </button>
+                 </Link>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
         </div>
       </div>
     );
   }
 }
+

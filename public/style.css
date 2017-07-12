@@ -6,6 +6,7 @@ body {
   padding-bottom: 56px;
   }
 
+
 #main {
   padding-left: 0; }
 
@@ -59,5 +60,5 @@ footer {
   footer .progress-bar {
     transition: none !important; }
 
-.album img {
+. img {
   height: 300px; }

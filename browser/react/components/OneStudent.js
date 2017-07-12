@@ -13,8 +13,6 @@ export default class OneStudent extends Component {
 
   componentDidMount () {
     const studentId = this.props.match.params.studentId;
-
-  console.log("PRINT",studentId)
     axios.get(`/api/student/${studentId}`)
       .then(res => res.data)
       .then(student => this.setState({
@@ -26,13 +24,34 @@ export default class OneStudent extends Component {
     const student = this.state.selectedStudent;
 
     return (
-      <div className="student">
-        <div>
-          <h3>{student.name}</h3>
-          <h3>{student.email}</h3>
-
-        </div>
-      </div>
+      <table className="table">
+        <thead>
+        <tr>
+          <th>NAME</th>
+          <th>EMAIL</th>
+          <th>CAMPUS</th>
+          <th>Update</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{student.name}</td>
+        <td>{student.email}</td>
+        <td>{}</td>
+          <td>
+            <button className="btn btn-default btn-xs">
+            <span className="glyphicon glyphicon-play">Update</span>
+            </button>
+          </td>
+          <td>
+            <button className="btn btn-default btn-xs">
+            <span className="glyphicon glyphicon-play">Delete</span>
+            </button>
+          </td>
+      </tr>
+      </tbody>
+      </table>
     );
   }
 }
