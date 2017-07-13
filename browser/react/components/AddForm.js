@@ -10,40 +10,40 @@ export default class AddForm extends Component {
       error: false,
       students: []
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount () {
-    axios.get('/api/student')
-      .then(res => res.data)
-      .then(students => {
-        this.setState({ students });
-      });
-  }
+//   componentDidMount () {
+//     axios.get('/api/student')
+//       .then(res => res.data)
+//       .then(students => {
+//         this.setState({ students });
+//       });
+//   }
 
-  handleChange (evt) {
-    this.setState({
-      studentId: evt.target.value,
-      error: false
-    });
-  }
+//   handleChange (evt) {
+//     this.setState({
+//       studentId: evt.target.value,
+//       error: false
+//     });
+//   }
 
-  handleSubmit (evt) {
-    evt.preventDefault();
+//   handleSubmit (evt) {
+//     evt.preventDefault();
 
-    // const campusId = this.props.playlist.id;
-    const studentId = this.state.studentId;
+//     // const campusId = this.props.playlist.id;
+//     const studentId = this.state.studentId;
 
-    this.props.addSongToPlaylist(playlistId, studentId)
-      .catch(err => {
-        this.setState({ error: true });
-      });
-  }
+//     this.props.addSongToPlaylist(playlistId, studentId)
+//       .catch(err => {
+//         this.setState({ error: true });
+//       });
+//   }
 
   render () {
 
-    const songs = this.state.songs;
+
     const error = this.state.error;
     const handleChange = this.handleChange;
     const handleSubmit = this.handleSubmit;
@@ -52,7 +52,7 @@ export default class AddForm extends Component {
       <div className="well">
         <form className="form-inline">
           <fieldset>
-            <legend>Add to Playlist</legend>
+            <legend>Add to Studentlist</legend>
             { error && <div className="alert alert-danger">Song is a duplicate</div> }
 
               <label> Name</label>

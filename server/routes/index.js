@@ -9,6 +9,6 @@ router.use('/student', require('./student'));
 
 
 
-router.use(function (req, res) {
-  res.status(404).end();
+router.use((req, res, next) => {
+  res.status(404).send('Not found');
 });

@@ -13,34 +13,19 @@ module.exports = router;
 router.get('/', function (req, res, next) {
 if(req.query.campusId){
     Student.findAll({where: {campusId: req.query.campusId}})
-        .then(function(students){
-            res.send(students);
-        })
+        .then(students => res.json(students))
     }
     else {
     Student.findAll()
-        .then(function (students) {
-            res.json(students);
-        })
-        .catch(next);
+        .then(students => res.json(students))
+    .catch(next);
     }
 });
 
-router.get('/:id', function (req, res, next) {
-    Student.findOne({
-        where:{
-        id: req.params.id
-        }
-    })
-        .then(function (student) {
-
-            if (!student) {
-                res.sendStatus(404);
-            } else {
-                res.send(student);
-            }
-        })
-         .catch(next);
+router.get('/:studentId', function (req, res, next) {
+    Student.findById(req.params.studentId)
+    .then(student => res.json(student))
+    .catch(next);
 
 });
 
@@ -49,24 +34,16 @@ router.post('/', function (req, res, next) {
         name: req.body.name,
         email: req.body.email,
         campusId: req.body.campusId })
-        .then(function (student) {
-            res.status(201).send(student);
-        })
+        .then(student => res.status(201).send(student))
         .catch(next);
 });
 
-router.put('/:id', function (req, res, next) {
-    if(!req.params.id){
-        res.sendStatus(500);
-    }
-    Student.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
+router.put('/:studentId', function (req, res, next) {
+   Student.findById(req.params.studentId)
     .then(student =>{
         if(!student) {res.sendStatus(404)};
-        return student.update({name: req.body.name, email: req.body.email})
+        return student.update({name: req.body.name, email: req.body.email,
+        campusId: req.body.campusId})
     })
     .then(student =>{
         res.send(student);
@@ -74,21 +51,10 @@ router.put('/:id', function (req, res, next) {
     .catch(next)
 });
 
-router.delete('/:id', function (req, res, next) {
-    if (!req.params.id) {
-        res.sendStatus(500);
-    }
-   Student.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(function (student) {
-            if (!student) { res.sendStatus(404) };
-            return student.destroy({})
-        })
-        .then(function (student) {
-            res.sendStatus(204);
-        })
-        .catch(next)
+router.delete('/:studentId', function (req, res, next) {
+const id = req.params.studentId;
+
+  Student.destroy({ where: { id } })
+    .then(() => res.status(204).end())
+    .catch(next);
 });
