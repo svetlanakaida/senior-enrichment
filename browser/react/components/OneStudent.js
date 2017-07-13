@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import StudentEdit from './StudentEdit';
 
 
 export default class OneStudent extends Component {
@@ -9,6 +11,7 @@ export default class OneStudent extends Component {
     this.state = {
       selectedStudent: {}
     };
+
   }
 
   componentDidMount () {
@@ -24,6 +27,8 @@ export default class OneStudent extends Component {
     const student = this.state.selectedStudent;
 
     return (
+      <div>
+
       <table className="table">
         <thead>
         <tr>
@@ -40,8 +45,9 @@ export default class OneStudent extends Component {
         <td>{student.email}</td>
         <td>{}</td>
           <td>
+
             <button className="btn btn-default btn-xs">
-            <span className="glyphicon glyphicon-play">Update</span>
+            <span className="glyphicon glyphicon-play"> <Link to={`/update/${student.id}`}>Update</Link></span>
             </button>
           </td>
           <td>
@@ -52,6 +58,7 @@ export default class OneStudent extends Component {
       </tr>
       </tbody>
       </table>
+</div>
     );
   }
 }

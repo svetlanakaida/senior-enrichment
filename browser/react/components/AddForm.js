@@ -1,72 +1,72 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class AddForm extends Component {
 
   constructor (props) {
     super(props);
     this.state = {
-      inputValue: '',
-      dirty: false
+      studentId: 1,
+      error: false,
+      students: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount () {
+    axios.get('/api/student')
+      .then(res => res.data)
+      .then(students => {
+        this.setState({ students });
+      });
+  }
+
   handleChange (evt) {
-    const value = evt.target.value;
     this.setState({
-      inputValue: value,
-      dirty: true
+      studentId: evt.target.value,
+      error: false
     });
   }
 
   handleSubmit (evt) {
     evt.preventDefault();
 
-    const addStudent= this.props.addStudent;
-    addStudent(this.state.inputValue);
-    this.setState({
-      inputValue: '',
-      dirty: false
-    });
+    // const campusId = this.props.playlist.id;
+    const studentId = this.state.studentId;
+
+    this.props.addSongToPlaylist(playlistId, studentId)
+      .catch(err => {
+        this.setState({ error: true });
+      });
   }
 
   render () {
 
-    const dirty = this.state.dirty;
-    const inputValue = this.state.inputValue;
-    const handleSubmit = this.handleSubmit;
+    const songs = this.state.songs;
+    const error = this.state.error;
     const handleChange = this.handleChange;
-
-    let warning = '';
-    if (!inputValue && dirty) warning = 'You must enter a name';
-    else if (inputValue.length > 16) warning = 'Name must be less than 16 characters';
+    const handleSubmit = this.handleSubmit;
 
     return (
-      <div className="well" style={{marginTop: '20px'}}>
-        <form className="form-horizontal" onSubmit={handleSubmit}>
+      <div className="well">
+        <form className="form-inline">
           <fieldset>
-            <legend>New Studentt</legend>
-            { warning && <div className="alert alert-warning">{warning}</div> }
-            <div className="form-group">
-              <label className="col-xs-2 control-label">Name</label>
-              <div className="col-xs-10">
-                <input
-                  className="form-control"
-                  type="text"
-                  onChange={handleChange}
-                  value={inputValue}
-                />
-              </div>
-            </div>
+            <legend>Add to Playlist</legend>
+            { error && <div className="alert alert-danger">Song is a duplicate</div> }
+
+              <label> Name</label>
+    <input type="name" className="form-control" placeholder="Name"></input>
+
+   <label>Email </label>
+    <input type="email" className="form-control" placeholder="Email"></input>
+
+              <label> Campus </label>
+    <input type="campus" className="form-control" placeholder="Campus"></input>
+
             <div className="form-group">
               <div className="col-xs-10 col-xs-offset-2">
-                <button
-                  type="submit"
-                  className="btn btn-success"
-                  disabled={!!warning || !inputValue}>
-                  Create Playlist
-                </button>
+                <button type="submit" className="btn btn-success">   Add Student</button>
               </div>
             </div>
           </fieldset>

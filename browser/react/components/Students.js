@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import AddForm from "./AddForm";
 
 
 export default class Students extends Component {
@@ -25,6 +26,8 @@ export default class Students extends Component {
     const students = this.state.students;
 
     return (
+      <div>
+ <AddForm students={students} />
     <table className='table'>
       <thead>
         <tr>
@@ -42,7 +45,7 @@ export default class Students extends Component {
               <td> Campus</td>
               <td>
               <Link to={`/students/${student.id}`}>
-                <button type="button" className="btn btn-default" aria-label="Left Align">Edit
+                <button type="button" className="btn btn-default" aria-label="Left Align">View
                 </button>
                  </Link>
               </td>
@@ -51,6 +54,7 @@ export default class Students extends Component {
         }
       </tbody>
     </table>
+    </div>
   );
 }
 }
