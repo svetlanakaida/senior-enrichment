@@ -6,7 +6,10 @@ var db = require('../index.js');
 module.exports = db.define('student', {
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            notEmpty: true
+        }
     },
     email: {
         type: Sequelize.STRING,

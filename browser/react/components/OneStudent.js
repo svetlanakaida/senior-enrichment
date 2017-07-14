@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import StudentEdit from './StudentEdit';
+
 
 
 export default class OneStudent extends Component {
@@ -28,7 +28,6 @@ export default class OneStudent extends Component {
 
     return (
       <div>
-
       <table className="table">
         <thead>
         <tr>
@@ -43,22 +42,23 @@ export default class OneStudent extends Component {
       <tr>
         <td>{student.name}</td>
         <td>{student.email}</td>
-        <td>{}</td>
+        <td> Campus</td>
           <td>
-
-            <button className="btn btn-default btn-xs">
-            <span className="glyphicon glyphicon-play"> <Link to={`/update/${student.id}`}>Update</Link></span>
-            </button>
+              <Link to={`/update/${student.id}`}>
+               <button className="btn btn-default btn-xs">Update
+               </button>
+              </Link>
           </td>
           <td>
-            <button className="btn btn-default btn-xs">
-            <span className="glyphicon glyphicon-play">Delete</span>
-            </button>
+              <Link to={`/update/${student.id}`}>
+               <button className="btn btn-default btn-xs">Delete
+               </button>
+              </Link>
           </td>
       </tr>
       </tbody>
       </table>
-</div>
+      </div>
     );
   }
 }

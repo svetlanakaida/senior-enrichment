@@ -51,8 +51,8 @@ export default class OneCampus extends Component {
       </thead>
       <tbody>{
             this.state.selectedStudents.map(student => (
-              <tr  key={student.id}>
-              <td>{ student.name}</td>
+              <tr key={student.id}>
+              <td>{student.name}</td>
               <td>{student.email }</td>
               <td>{campus.name}</td>
               <td>

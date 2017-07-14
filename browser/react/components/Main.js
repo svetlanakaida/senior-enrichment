@@ -8,10 +8,7 @@ import OneStudent from './OneStudent';
 import NavBar from './NavBar';
 
 
-export default class Main extends Component {
-
-
-  render () {
+const Main = () => {
 
 
     return (
@@ -27,11 +24,11 @@ export default class Main extends Component {
               <Route path="/campuses/:campusId" component={OneCampus} />
               <Route exact path="/students" component={Students} />
               <Route path="/students/:studentId" component={OneStudent} />
-
             </Switch>
           </div>
         </div>
     </Router>
     );
   }
-}
+
+export default Main;

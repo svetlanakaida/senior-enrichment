@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const router = new express.Router();
 const models = require('../../db/models');
 const Campus = models.Campus;
 const Student = models.Student;
@@ -21,7 +21,6 @@ router.get('/:campusId', function (req, res, next) {
     .catch(next);
 });
 
-
 router.get('/:campusId/students', function (req, res, next) {
 const campusId = req.params.campusId;
 
@@ -30,22 +29,19 @@ const campusId = req.params.campusId;
     .catch(next);
 });
 
-
-
 router.post('/', function (req, res, next) {
    Campus.create(req.body)
     .then(campus => res.json(campus))
     .catch(next);
 });
 
-
 router.put('/:campusId', function (req, res, next) {
     Campus.findById(req.params.campusId)
-    .then(campus =>{
-        if(!campus) {res.sendStatus(404)};
-        return campus.update({name: req.body.name})
+    .then(campus => {
+        if (!campus) {res.sendStatus(404)};
+        return campus.update( {name: req.body.name, imageUrl: req.body.imageUrl} )
     })
-    .then(campus =>{
+    .then(campus => {
         res.send(campus);
     })
     .catch(next)
@@ -58,5 +54,4 @@ router.delete('/:campusId', function (req, res, next) {
     .then(() => res.status(204).end())
     .catch(next);
 });
-
 
