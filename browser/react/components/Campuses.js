@@ -49,31 +49,17 @@ export default class Campuses extends Component {
   }
 }
 
-// import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
-// import store from '../store';
+
+// import React from 'react';
+// import { withRouter, NavLink } from 'react-router-dom';
+// import { connect } from 'react-redux';
 
 
-// export default class Campuses extends Component {
+// function Campuses (props) {
 
-//   constructor () {
-//     super();
-//     this.state = store.getState();
-//   }
-
-//   componentDidMount () {
-//     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
-//   }
-
-//   componentWillUnmount () {
-//     this.unsubscribe();
-//   }
+//     const { campuses, changeCampus } = props;
 
 
-//   render () {
-
-//     const campuses = this.state.campuses;
-// console.log("PRINT", this.state.campuses)
 //     return (
 //       <div>
 //         <h3>CAMPUSES</h3>
@@ -82,20 +68,30 @@ export default class Campuses extends Component {
 //             campuses.map(campus => {
 //               return (
 //                 <div className="col-lg-6" key={campus.id}>
-//                   <Link to={`/campuses/${campus.id}`}>
+//                   <NavLink to={`/campuses/${campus.id}`}>
 //                     <img src={ campus.imageUrl } />
 //                     <div className="caption">
 //                       <h5>
 //                         <span>{ campus.name }</span>
 //                       </h5>
 //                     </div>
-//                   </Link>
+//                   </NavLink>
 //                 </div>
 //               );
 //             })
 //           }
 //         </div>
+//         <li>
+//         <NavLink to="/new-campus">Create a campus...</NavLink>
+//       </li>
 //       </div>
 //     );
 //   }
-// }
+
+// const mapStateToProps = function (state) {
+//   return {
+//     campuses: state.campuses
+//   };
+// };
+
+// export default withRouter(connect(mapStateToProps)(Campuses));

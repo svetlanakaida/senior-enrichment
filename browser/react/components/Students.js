@@ -4,7 +4,6 @@ import axios from 'axios';
 import AddForm from './AddForm';
 
 
-
 export default class Students extends Component {
 
   constructor () {
@@ -12,7 +11,7 @@ export default class Students extends Component {
     this.state = {
       students: []
     };
-    this.addStudent = this.addStudent.bind(this);
+this.addStudent = this.addStudent.bind(this);
 
   }
 
@@ -23,10 +22,9 @@ export default class Students extends Component {
           this.setState({ students: student })
       });
   }
-   addStudent (student) {
-    axios.post('/api/student/', {
-      name: student.name,
-      email: student.email
+   addStudent (studentId) {
+    return axios.post('/api/student/', {
+      studentId: studentId
     })
     .then(res => res.data)
     .then(student => {

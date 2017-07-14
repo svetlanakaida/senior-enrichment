@@ -10,7 +10,7 @@ socket.on('connect', () => {
     store.dispatch(getCampus(campus));
   });
 
-  socket.on('new-student', student => {
+  socket.on('new-channel', student => {
     store.dispatch(getStudent(student));
   });
 

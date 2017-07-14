@@ -8,14 +8,14 @@ export default class AddForm extends Component {
     this.state = {
       name: '',
       email: '',
-
+      campus: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount () {
-    axios.get('/api/student/')
+    axios.get('/api/student')
       .then(res => res.data)
       .then(students => {
         this.setState({ students });
@@ -23,22 +23,18 @@ export default class AddForm extends Component {
   }
 
   handleChange (evt) {
-    console.log(evt.target.value);
     this.setState({
-      name: evt.target.name.value,
-      email: evt.target.email.value
-
+      studentId: evt.target.value,
     });
   }
 
   handleSubmit (evt) {
     evt.preventDefault();
+
+
     this.props.addStudent(this.state);
 
-    this.setState({
-      name: '',
-      email: '',
-    });
+    this.setState(this.state);
 
   }
 
@@ -54,11 +50,17 @@ export default class AddForm extends Component {
           <fieldset>
             <legend>Add to Studentlist</legend>
               <label> Name</label>
-               <input name ="name" type="text" className="form-control" placeholder="Name"
+               <input type="text" className="form-control" placeholder="Name"
+
                onChange={handleChange}/>
                <label>Email </label>
-               <input name ="email" type="text" className="form-control" placeholder="Email"
-                onChange={handleChange}/>
+               <input type="email" className="form-control" placeholder="Email"
+
+               onChange={handleChange}/>
+               <label> Campus </label>
+               <input type="campus" className="form-control" placeholder="Campus"
+
+               onChange={handleChange}/>
                <div className="form-group">
                   <div className="col-xs-10 col-xs-offset-2">
                     <button type="submit" className="btn btn-success">   Add Student</button>
