@@ -25,7 +25,10 @@ export default class OneStudent extends Component {
 
   render () {
     const student = this.state.selectedStudent;
-
+    let campus = this.state.selectedStudent.campus;
+    if(!campus){
+      campus = "campus";
+    }
     return (
       <div>
       <table className="table">
@@ -42,7 +45,7 @@ export default class OneStudent extends Component {
       <tr>
         <td>{student.name}</td>
         <td>{student.email}</td>
-        <td> Campus</td>
+        <td>{campus.name}</td>
           <td>
               <Link to={`/update/${student.id}`}>
                <button className="btn btn-default btn-xs">Update
