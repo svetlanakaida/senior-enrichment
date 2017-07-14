@@ -1,6 +1,7 @@
+'use strict';
 
 const express = require('express');
-const router = new express.Router();
+const router = express.Router();
 const models = require('../../db/models');
 const Student = models.Student;
 const Campus = models.Student;
@@ -10,12 +11,9 @@ module.exports = router;
 
 
 router.get('/', function (req, res, next) {
-    if(req.query.campusId){
-        Student.findAll({
-            where: {
-                campusId: req.query.campusId}
-            })
-            .then(student => {res.json(student);
+    if (req.query.campusId){
+        Student.findAll({where: {campusId: req.query.campusId}})
+            .then(students => {res.json(students);
             })
             .catch(next);
     }
@@ -27,6 +25,18 @@ router.get('/', function (req, res, next) {
     }
 });
 
+
+// router.get('/', (req, res, next) => {
+//   if (req.query.campusId) {
+//     Student.findAll({
+//       where: {
+//         campusId: req.query.campusId
+//       }
+//     })
+//       .then(students => {
+//         res.json(students);
+//       })
+//       .catch(next);
 //   } else {
 //     Student.findAll({
 //       include: {

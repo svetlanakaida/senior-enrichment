@@ -11,11 +11,9 @@ export default class Students extends Component {
     this.state = {
       students: []
     };
-
+this.addStudent = this.addStudent.bind(this);
 
   }
-
-
 
   componentDidMount () {
     axios.get('/api/student/')
@@ -24,14 +22,26 @@ export default class Students extends Component {
           this.setState({ students: student })
       });
   }
-
+   addStudent (studentId) {
+    return axios.post('/api/student/', {
+      studentId: studentId
+    })
+    .then(res => res.data)
+    .then(student => {
+      const students = this.state.students;
+      const newStudent = [...students, student ];
+     this.setState({ students: newStudent });
+    });
+  }
   render () {
 
     const students = this.state.students;
 
     return (
       <div>
-      <AddForm students={students} />
+      <div>
+      <AddForm students={students} addStudent ={this.addStudent} />
+      </div>
       <table className='table'>
         <thead>
           <tr>
