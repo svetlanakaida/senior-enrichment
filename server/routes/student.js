@@ -4,10 +4,9 @@ const express = require('express');
 const router = express.Router();
 const models = require('../../db/models');
 const Student = models.Student;
-const Campus = models.Student;
+const Campus = models.Campus;
 
 module.exports = router;
-
 
 
 router.get('/', function (req, res, next) {
@@ -18,7 +17,12 @@ router.get('/', function (req, res, next) {
             .catch(next);
     }
     else {
-        Student.findAll()
+        Student.findAll({
+      include: {
+        model: Campus,
+        as: 'campus'
+      }
+    })
             .then(students => {res.json(students);
             })
             .catch(next);
@@ -26,31 +30,12 @@ router.get('/', function (req, res, next) {
 });
 
 
-// router.get('/', (req, res, next) => {
-//   if (req.query.campusId) {
-//     Student.findAll({
-//       where: {
-//         campusId: req.query.campusId
-//       }
-//     })
-//       .then(students => {
-//         res.json(students);
-//       })
-//       .catch(next);
-//   } else {
-//     Student.findAll({
-//       include: {
-//         model: Campus,
-//         as: 'campus'
-//       }
-//     })
-//       .then(students => {
-//         res.json(students);
-//       })
-//       .catch(next);
-//   }
-// });
-
+    // Student.findAll({
+    //   include: {
+    //     model: Campus,
+    //     as: 'campus'
+    //   }
+    // })
 
 
 router.get('/:studentId', function (req, res, next) {

@@ -56,7 +56,7 @@ this.addStudent = this.addStudent.bind(this);
               <tr  key={student.id}>
                 <td>{ student.name}</td>
                 <td>{student.email }</td>
-                <td>{}</td>
+                <td>{student.campus.name}</td>
                 <td>
                 <Link to={`/students/${student.id}`}>
                   <button type="button" className="btn btn-default" aria-label="Left Align">View
