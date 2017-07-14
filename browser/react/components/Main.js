@@ -5,7 +5,8 @@ import Campuses from './Campuses';
 import Students from './Students';
 import OneCampus from './OneCampus';
 import OneStudent from './OneStudent';
-import NavBar from './NavBar';
+import NavBar from './Navbar'
+import store from "../store";
 
 
 const Main = () => {

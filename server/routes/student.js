@@ -23,33 +23,31 @@ router.get('/', function (req, res, next) {
         as: 'campus'
       }
     })
-            .then(students => {res.json(students);
+       .then(students => {res.json(students);
             })
-            .catch(next);
+       .catch(next);
     }
 });
 
-
-    // Student.findAll({
-    //   include: {
-    //     model: Campus,
-    //     as: 'campus'
-    //   }
-    // })
-
-
-router.get('/:studentId', function (req, res, next) {
-    Student.findById(req.params.studentId)
-    .then(student => res.json(student))
+router.get('/:studentId', (req, res, next) => {
+  Student.findOne({
+    where: {
+      id: req.params.studentId
+    },
+    include: {
+      model: Campus,
+      as: 'campus'
+    }
+  }).then(student => {
+    res.json(student);
+  })
     .catch(next);
-
 });
 
 router.post('/', function (req, res, next) {
    Student.create({
         name: req.body.name,
-        email: req.body.email,
-        campusId: req.body.campusId })
+        email: req.body.email})
         .then(student => res.status(201).send(student))
         .catch(next);
 });
