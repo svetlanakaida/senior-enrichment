@@ -47,7 +47,8 @@ router.get('/:studentId', (req, res, next) => {
 router.post('/', function (req, res, next) {
    Student.create({
         name: req.body.name,
-        email: req.body.email})
+        email: req.body.email,
+        campusId: req.body.campusId})
         .then(student => res.status(201).send(student))
         .catch(next);
 });
@@ -57,7 +58,7 @@ router.put('/:studentId', function (req, res, next) {
     .then(student => {
         if (!student ) { res.sendStatus(404) };
         return student.update({name: req.body.name, email: req.body.email,
-        campusId: req.body.campusId})
+        campusId: req.body.campusId} )
     })
     .then(student => {
         res.send(student);

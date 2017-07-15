@@ -73,7 +73,7 @@ export default class Campuses extends Component {
 //   render () {
 
 //     const campuses = this.state.campuses;
-// console.log("PRINT", this.state.campuses)
+
 //     return (
 //       <div>
 //         <h3>CAMPUSES</h3>

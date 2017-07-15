@@ -8,6 +8,7 @@ export default class AddForm extends Component {
     this.state = {
       name: '',
       email: '',
+      campus: ''
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -58,6 +59,9 @@ export default class AddForm extends Component {
                onChange={handleChange}/>
                <label>Email </label>
                <input name ="email" type="text" className="form-control" placeholder="Email"
+                onChange={handleChange}/>
+                 <label>Campus </label>
+               <input name ="campus" type="text" className="form-control" placeholder="Campus"
                 onChange={handleChange}/>
                <div className="form-group">
                   <div className="col-xs-10 col-xs-offset-2">

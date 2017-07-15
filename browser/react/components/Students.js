@@ -23,10 +23,9 @@ export default class Students extends Component {
           this.setState({ students: student })
       });
   }
-   addStudent (student) {
+   addStudent (studentId) {
     axios.post('/api/student/', {
-      name: student.name,
-      email: student.email
+     studentId: studentId
     })
     .then(res => res.data)
     .then(student => {
@@ -38,7 +37,7 @@ export default class Students extends Component {
   render () {
 
     const students = this.state.students;
-
+console.log("STUDENt", students);
     return (
       <div>
       <div>
