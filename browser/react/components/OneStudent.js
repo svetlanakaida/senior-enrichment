@@ -65,3 +65,66 @@ export default class OneStudent extends Component {
     );
   }
 }
+
+
+// import store from '../store';
+// import React, { Component } from 'react';
+// import { Link } from 'react-router-dom';
+
+// export default class OneStudent extends Component {
+
+//   constructor () {
+//     super();
+//     this.state = store.getState();
+//   }
+
+//   componentDidMount () {
+//     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+//   }
+
+//   componentWillUnmount () {
+//     this.unsubscribe();
+//   }
+
+//   render () {
+//     const student = this.state.selectedStudent;
+//     let campus = this.state.selectedStudent.campus;
+//     if(!campus){
+//       campus = "campus";
+//     }
+//     return (
+//       <div>
+//       <table className="table">
+//         <thead>
+//         <tr>
+//           <th>NAME</th>
+//           <th>EMAIL</th>
+//           <th>CAMPUS</th>
+//           <th>Update</th>
+//           <th>Remove</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//       <tr>
+//         <td>{student.name}</td>
+//         <td>{student.email}</td>
+//         <td>{campus.name}</td>
+//           <td>
+//               <Link to={`/update/${student.id}`}>
+//                <button className="btn btn-default btn-xs">Update
+//                </button>
+//               </Link>
+//           </td>
+//           <td>
+//               <Link to={`/update/${student.id}`}>
+//                <button className="btn btn-default btn-xs">Delete
+//                </button>
+//               </Link>
+//           </td>
+//       </tr>
+//       </tbody>
+//       </table>
+//       </div>
+//     );
+//   }
+// }
