@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Students from '../components/Students';
+import UpdateCampus from './UpdateCampus';
 
 
 export default class OneCampus extends Component {
@@ -12,6 +13,7 @@ export default class OneCampus extends Component {
       selectedCampus: {},
       selectedStudents:[]
     };
+     this.updateCampus = this.updateCampus.bind(this);
   }
 
   componentDidMount () {
@@ -30,12 +32,25 @@ export default class OneCampus extends Component {
       });
   }
 
+  updateCampus (name, imageUrl) {
+      const campusId = this.props.match.params.campusId;
+    return  axios.put(`/api/campus/${campusId}`, {
+     name, imageUrl
+    })
+    .then(res => res.data)
+    .then(campus => {
+      const updatedCampus = this.state.campuses;
+     this.setState({ campuses: updatedCampus });
+    });
+  }
+
+
   render () {
     const campus = this.state.selectedCampus;
 
     return (
       <div className="campus">
-
+       <UpdateCampus updateCampus ={this.updateCampus} campuses = {this.state.campuses}  />
         <div>
           <img src={ campus.imageUrl } className="img-thumbnail" />
            <h3>{ campus.name }</h3>

@@ -61,7 +61,7 @@ console.log("PRINT CAMPUSES", campuses)
       <div className="well">
         <form className="form-inline" onSubmit ={handleSubmit}>
           <fieldset>
-            <legend>Add to Studentlist</legend>
+            <legend>Update student info</legend>
               <label> Name</label>
                <input type="text" className="form-control" placeholder="Name"
                value= {this.state.name}
