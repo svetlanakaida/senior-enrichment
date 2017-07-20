@@ -5,9 +5,9 @@ export default class DeleteStudent extends Component {
     constructor (props) {
     super(props);
     this.state = {
-     selectedStudent: {},
-     students: []
 
+     students: [],
+     studentId: ""
     };
     this.handleDelete = this.handleDelete.bind(this);
 
@@ -15,22 +15,21 @@ export default class DeleteStudent extends Component {
 
 
   handleDelete(evt) {
+      console.log("HANDLE DELETE PROPS", this.props)
     evt.preventDefault();
-    const students = this.state.student.studentId;
+    const studentId = this.state.studentId;
     this.props.deleteStudent(studentId)
-      .catch(err => {
-        this.setState({students });
-      });
+
   }
  render(){
 
-  const student = this.state.selectedStudent;
+//   const studentId = this.state.studentId;
   return (
-    <Link to={`/delete/${student.id}`}>
-               <button className="btn btn-default btn-xs"
+
+               <button className="btn btn-default btn-xs" onClick={this.handleDelete}
                 >Delete
                </button>
-   </Link>
+
   )
  }
 }

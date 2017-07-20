@@ -9,10 +9,26 @@ import NavBar from './Navbar'
 import store from "../store";
 
 
-const Main = () => {
+export default class Main extends Component {
+constructor (props) {
+    super(props);
+
+    this.state = {
+      campuses: []
+    };
 
 
-    return (
+  }
+
+  // componentDidMount () {
+  //   axios.get('/api/campus/')
+  //     .then(res => res.data)
+  //     .then(campus => {
+  //         this.setState({ campuses: campus })
+  //     });
+  // }
+  render() {
+      return (
       <Router>
          <div id="main" className="container-fluid">
           <div className="col-xs-2">
@@ -31,5 +47,6 @@ const Main = () => {
     </Router>
     );
   }
+}
 
-export default Main;
+// <Route path="/students/:studentId" render={() => <OneStudent  campuses={this.state.campuses} /> } />

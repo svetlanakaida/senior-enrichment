@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import DeleteStudent from './DeleteStudent';
+
 import UpdateStudent from './UpdateStudent';
 
 
@@ -10,9 +10,11 @@ export default class OneStudent extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      selectedStudent: {}
+      selectedStudent: {},
+      campuses: [],
+      students: []
     };
-   this.deleteStudent = this.deleteStudent.bind(this);
+
    this.updateStudent = this.updateStudent.bind(this);
   }
 
@@ -34,17 +36,9 @@ export default class OneStudent extends Component {
         })
   }
 
-  deleteStudent (studentId) {
-    return  axios.delete(`/api/student/${studentId}`)
-    .then(res => res.data)
-    .then(students => { this.state.students.filter(
-      student => student.id !== studentId
-    );
-    this.setState({ students });
-    });
-  }
 
    updateStudent (name, email, campusId) {
+     const studentId = this.props.match.params.studentId;
     return  axios.put(`/api/student/${studentId}`, {
      name, email, campusId
     })
@@ -65,15 +59,14 @@ export default class OneStudent extends Component {
     return (
 
       <div>
-      <UpdateStudent updateStudent ={this.updateStudent} campuses = {this.props.campuses} />
+      <UpdateStudent updateStudent ={this.updateStudent} campuses = {this.state.campuses} />
       <table className="table">
         <thead>
         <tr>
           <th>NAME</th>
           <th>EMAIL</th>
           <th>CAMPUS</th>
-          <th>Update</th>
-          <th>Remove</th>
+
         </tr>
       </thead>
       <tbody>
@@ -81,11 +74,6 @@ export default class OneStudent extends Component {
         <td>{student.name}</td>
         <td>{student.email}</td>
         <td>{campus.name}</td>
-          <td>
-          </td>
-          <td>
-             <DeleteStudent />
-          </td>
       </tr>
       </tbody>
       </table>

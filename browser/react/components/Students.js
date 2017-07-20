@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import AddStudentForm from './AddStudentForm';
+import DeleteStudent from './DeleteStudent';
 
 export default class Students extends Component {
 
@@ -12,7 +13,7 @@ export default class Students extends Component {
       campuses: []
     };
     this.addStudent = this.addStudent.bind(this);
-
+    this.deleteStudent = this.deleteStudent.bind(this);
   }
 
   componentDidMount () {
@@ -45,9 +46,24 @@ export default class Students extends Component {
     });
   }
 
+  deleteStudent (studentId) {
+
+    return  axios.delete(`/api/student/${studentId}`)
+    .then(res => res.data)
+    .then(students => {
+      this.state.students.filter(
+      student => student.id !== studentId
+    )
+    .then((deletedStudent) => {
+         console.log("DELETED STUD",deletedStudent)
+     }
+    )
+    })
+    .catch(err => console.log(err))
+  }
 
   render () {
-console.log("CAMP", this.state.campuses)
+console.log("PROPS")
     const students = this.state.students;
     const campuses = this.props.campuses;
 
@@ -62,6 +78,7 @@ console.log("CAMP", this.state.campuses)
             <th>NAME</th>
             <th>EMAIL</th>
             <th>CAMPUS</th>
+            <th> DELETE </th>
             <th></th>
           </tr>
         </thead>
@@ -71,6 +88,7 @@ console.log("CAMP", this.state.campuses)
                 <td>{ student.name}</td>
                 <td>{student.email }</td>
                 <td>{student.campus.name}</td>
+                <td>  <DeleteStudent deleteStudent ={this.deleteStudent} studentId={this.student.studentId} /></td>
                 <td>
                 <Link to={`/students/${student.id}`}>
                   <button type="button" className="btn btn-default" aria-label="Left Align">View
