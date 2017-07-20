@@ -45,6 +45,7 @@ router.get('/:studentId', (req, res, next) => {
 });
 
 router.post('/', function (req, res, next) {
+  console.log("BODY",req.body);
    Student.create({
         name: req.body.name,
         email: req.body.email,

@@ -18,6 +18,8 @@ const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
+const ADD_STUDENT = 'ADD_STUDENT';
+const REMOVE = 'REMOVE_STUDENT';
 
 //  ACTION CREATORS
 
@@ -39,6 +41,16 @@ export function getStudents (students) {
 export function getStudent (student) {
   const action = { type: GET_STUDENT, student };
   return action;
+}
+
+
+export function addStudent (student){
+ const action= { type: ADD_STUDENT,
+  newStudent: student }
+}
+
+export function remove (id){
+  const action = {type: REMOVE, id: id }
 }
 
 //  THUNK CREATORS

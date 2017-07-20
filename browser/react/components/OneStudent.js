@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
+import DeleteStudent from './DeleteStudent';
+import UpdateStudent from './UpdateStudent';
 
 
 export default class OneStudent extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       selectedStudent: {}
     };
-
+   this.deleteStudent = this.deleteStudent.bind(this);
+   this.updateStudent = this.updateStudent.bind(this);
   }
 
   componentDidMount () {
@@ -21,16 +23,49 @@ export default class OneStudent extends Component {
       .then(student => this.setState({
         selectedStudent: student
       }));
+       axios.get('/api/campus/')
+      .then(res => res.data)
+      .then(campus => {
+        console.log("PRINT_CAMPUSES", campus)
+          this.setState({ campuses: campus })
+      })
+        .catch(err => {
+          console.log(err)
+        })
+  }
+
+  deleteStudent (studentId) {
+    return  axios.delete(`/api/student/${studentId}`)
+    .then(res => res.data)
+    .then(students => { this.state.students.filter(
+      student => student.id !== studentId
+    );
+    this.setState({ students });
+    });
+  }
+
+   updateStudent (name, email, campusId) {
+    return  axios.put(`/api/student/${studentId}`, {
+     name, email, campusId
+    })
+    .then(res => res.data)
+    .then(student => {
+      const updatedStudent = this.state.students;
+     this.setState({ students: updatedStudent });
+    });
   }
 
   render () {
+    console.log("PRINT PROPS", this.props)
     const student = this.state.selectedStudent;
     let campus = this.state.selectedStudent.campus;
     if(!campus){
       campus = "campus";
     }
     return (
+
       <div>
+      <UpdateStudent updateStudent ={this.updateStudent} campuses = {this.props.campuses} />
       <table className="table">
         <thead>
         <tr>
@@ -47,16 +82,9 @@ export default class OneStudent extends Component {
         <td>{student.email}</td>
         <td>{campus.name}</td>
           <td>
-              <Link to={`/update/${student.id}`}>
-               <button className="btn btn-default btn-xs">Update
-               </button>
-              </Link>
           </td>
           <td>
-              <Link to={`/update/${student.id}`}>
-               <button className="btn btn-default btn-xs">Delete
-               </button>
-              </Link>
+             <DeleteStudent />
           </td>
       </tr>
       </tbody>

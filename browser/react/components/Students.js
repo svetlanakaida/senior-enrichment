@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import AddForm from './AddForm';
+import AddStudentForm from './AddStudentForm';
 
 export default class Students extends Component {
 
   constructor () {
     super();
     this.state = {
-      students: []
+      students: [],
+      campuses: []
     };
     this.addStudent = this.addStudent.bind(this);
 
   }
 
   componentDidMount () {
+
     axios.get('/api/student/')
       .then(res => res.data)
       .then(student => {
           this.setState({ students: student })
-      });
+      })
+
+        axios.get('/api/campus/')
+      .then(res => res.data)
+      .then(campus => {
+        console.log("PRINT_CAMPUSES", campus)
+          this.setState({ campuses: campus })
+      })
+        .catch(err => {
+          console.log(err)
+        })
   }
-   addStudent (studentId) {
-    axios.post('/api/student/', {
-     studentId: studentId
+   addStudent (name, email, campusId) {
+    return  axios.post('/api/student/', {
+     name, email, campusId
     })
     .then(res => res.data)
     .then(student => {
@@ -32,14 +44,17 @@ export default class Students extends Component {
      this.setState({ students: newStudent });
     });
   }
-  render () {
 
+
+  render () {
+console.log("CAMP", this.state.campuses)
     const students = this.state.students;
-console.log("STUDENt", students);
+    const campuses = this.props.campuses;
+
     return (
       <div>
       <div>
-      <AddForm students={students} addStudent ={this.addStudent} />
+      <AddStudentForm  addStudent ={this.addStudent} campuses = {this.state.campuses} />
       </div>
       <table className='table'>
         <thead>

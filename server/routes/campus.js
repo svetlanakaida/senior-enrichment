@@ -30,9 +30,11 @@ const campusId = req.params.campusId;
 });
 
 router.post('/', function (req, res, next) {
-   Campus.create(req.body)
-    .then(campus => res.json(campus))
-    .catch(next);
+   Campus.create({
+        name: req.body.name,
+        imageUrl: req.body.imageUrl })
+        .then(campus => res.status(201).send(campus))
+        .catch(next);
 });
 
 router.put('/:campusId', function (req, res, next) {

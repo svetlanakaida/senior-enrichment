@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import store from '../store';
+import AddCampusForm from './AddCampusForm';
+
 
 export default class Campuses extends Component {
 
@@ -10,6 +12,7 @@ export default class Campuses extends Component {
     this.state = {
       campuses: []
     };
+    this.addCampus = this.addCampus.bind(this);
   }
 
   componentDidMount () {
@@ -20,6 +23,19 @@ export default class Campuses extends Component {
       });
   }
 
+ addCampus (name, imageUrl) {
+   console.log("Print", name, imageUrl)
+    return  axios.post('/api/campus/', {
+     name, imageUrl
+    })
+    .then(res => res.data)
+    .then(campus => {
+      const campuses = this.state.campuses;
+      const newCampus = [...campuses, campus ];
+     this.setState({ campuses: newCampus });
+    });
+
+  }
   render () {
 
     const campuses = this.state.campuses;
@@ -27,6 +43,7 @@ export default class Campuses extends Component {
     return (
       <div>
         <h3>CAMPUSES</h3>
+        <AddCampusForm  addCampus ={this.addCampus} />
         <div className="list-group">
           {
             campuses.map(campus => {
