@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Students from '../components/Students';
 import UpdateCampus from './UpdateCampus';
+import DeleteCampus from './DeleteCampus';
 
 
 export default class OneCampus extends Component {
@@ -14,6 +15,7 @@ export default class OneCampus extends Component {
       selectedStudents:[]
     };
      this.updateCampus = this.updateCampus.bind(this);
+     this.deleteCampus = this.deleteCampus.bind(this);
   }
 
   componentDidMount () {
@@ -40,8 +42,23 @@ export default class OneCampus extends Component {
     .then(res => res.data)
     .then(campus => {
       const updatedCampus = this.state.campuses;
-     this.setState({ campuses: updatedCampus });
+     this.setState({ selectedCampus: updatedCampus });
     });
+  }
+
+deleteCampus (campusId) {
+    return  axios.delete(`/api/campus/${campusId}`)
+    // .then(res => res.data)
+    .then(campus => {
+     var filteredCampuses = this.state.campuses.filter(
+     campus => campus.id !== campusId
+    )
+    this.setState({ selectedCampus: filteredCampuses})
+    .then(( deleteCampus ) => {
+     }
+    )
+    })
+    .catch(err => console.log(err))
   }
 
 
@@ -53,7 +70,7 @@ export default class OneCampus extends Component {
        <UpdateCampus updateCampus ={this.updateCampus} campuses = {this.state.campuses}  />
         <div>
           <img src={ campus.imageUrl } className="img-thumbnail" />
-           <h3>{ campus.name }</h3>
+           <h3>{ campus.name } <DeleteCampus deleteCampus ={this.deleteCampus}  campusId= {campus.id} /></h3>
            <h5>Students</h5>
            <table className='table'>
       <thead>
@@ -87,24 +104,53 @@ export default class OneCampus extends Component {
   }
 }
 
-// import store from '../store';
+
 // import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux';
 // import Students from '../components/Students';
+// import UpdateCampus from './UpdateCampus';
+// import { getAllCampuses, removeCampus } from './store/campuses';
+
+
 
 // export default class OneCampus extends Component {
 
 //   constructor () {
 //     super();
-//     this.state = store.getState();
+//     this.state = {
+//       selectedCampus: {},
+//       selectedStudents:[]
+//     };
+//      this.updateCampus = this.updateCampus.bind(this);
 //   }
 
 //   componentDidMount () {
-//     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+//     const campusId = this.props.match.params.campusId;
+//     axios.get(`/api/campus/${campusId}`)
+//       .then(res => res.data)
+//       .then(campus => this.setState({
+//         selectedCampus: campus
+//       }))
+//         .then( res =>{
+//         axios.get(`/api/student/?campusId=${campusId}`)
+//         .then(res => res.data)
+//         .then(students => this.setState({
+//           selectedStudents: students
+//       }));
+//       });
 //   }
 
-//   componentWillUnmount () {
-//     this.unsubscribe();
+//   updateCampus (name, imageUrl) {
+//       const campusId = this.props.match.params.campusId;
+//     return  axios.put(`/api/campus/${campusId}`, {
+//      name, imageUrl
+//     })
+//     .then(res => res.data)
+//     .then(campus => {
+//       const updatedCampus = this.state.campuses;
+//      this.setState({ campuses: updatedCampus });
+//     });
 //   }
 
 
@@ -113,12 +159,12 @@ export default class OneCampus extends Component {
 
 //     return (
 //       <div className="campus">
-
+//        <UpdateCampus updateCampus ={this.updateCampus} campuses = {this.state.campuses}  />
 //         <div>
 //           <img src={ campus.imageUrl } className="img-thumbnail" />
 //            <h3>{ campus.name }</h3>
 //            <h5>Students</h5>
-//            <table className= 'table'>
+//            <table className='table'>
 //       <thead>
 //         <tr>
 //           <th>NAME</th>
@@ -149,3 +195,4 @@ export default class OneCampus extends Component {
 //     );
 //   }
 // }
+

@@ -6,8 +6,7 @@ export default class DeleteStudent extends Component {
     super(props);
     this.state = {
 
-     students: [],
-     studentId: ""
+     students: []
     };
     this.handleDelete = this.handleDelete.bind(this);
 
@@ -15,9 +14,9 @@ export default class DeleteStudent extends Component {
 
 
   handleDelete(evt) {
-      console.log("HANDLE DELETE PROPS", this.props)
+      console.log("HANDLE DELETE PROPS", this.state.studentId)
     evt.preventDefault();
-    const studentId = this.state.studentId;
+    const studentId = this.props.studentId;
     this.props.deleteStudent(studentId)
 
   }

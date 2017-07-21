@@ -47,19 +47,18 @@ export default class Students extends Component {
   }
 
   deleteStudent (studentId) {
-
-    // return  axios.delete(`/api/student/${studentId}`)
+    return  axios.delete(`/api/student/${studentId}`)
     // .then(res => res.data)
-    // .then(students => {
-    //   this.state.students.filter(
-    //   student => student.id !== studentId
-    // )
-    // .then((deletedStudent) => {
-    //      console.log("DELETED STUD",deletedStudent)
-    //  }
-    // )
-    // })
-    // .catch(err => console.log(err))
+    .then(students => {
+     var filteredStudents = this.state.students.filter(
+      student => student.id !== studentId
+    )
+    this.setState({students: filteredStudents})
+    .then((deletedStudent) => {
+     }
+    )
+    })
+    .catch(err => console.log(err))
   }
 
   render () {
@@ -88,7 +87,7 @@ console.log("PROPS")
                 <td>{ student.name}</td>
                 <td>{student.email }</td>
                 <td>{student.campus.name}</td>
-                <td>  </td>
+                <td>  <DeleteStudent deleteStudent ={this.deleteStudent}  studentId= {student.id} /></td>
                 <td>
                 <Link to={`/students/${student.id}`}>
                   <button type="button" className="btn btn-default" aria-label="Left Align">View
@@ -104,8 +103,6 @@ console.log("PROPS")
     );
   }
 }
-
-// <DeleteStudent deleteStudent ={this.deleteStudent} studentId={this.student.studentId} />
 
 // import store from '../store';
 // import React, { Component } from 'react';
